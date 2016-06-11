@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Netprint</title>
+  <title>DeviseQiita</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <header>
+        <nav>
+            <% if user_signed_in? %>
+                <strong<%= link_to current_user.username, me_index_path %></strong>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+            <% else %>
+
+            <%= link_to "Sign in with #{OmniAuth::Utils.camelize('twitter')}", omniauth_authorize_path('user', 'twitter') %><br />
+
+            <% end %>
+        </nav>
+    </header>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
 <%= yield %>
 

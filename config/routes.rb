@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'me/index'
+
+  root to: "top#index"
+
+  get 'omniauth_callbacks/twitter'
+
+  devise_for :users, controllers: { :omniauth_callbacks => "omniauth_callbacks" }
+  get 'top/index'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
