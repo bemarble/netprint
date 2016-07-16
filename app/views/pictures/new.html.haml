@@ -1,0 +1,23 @@
+= simple_form_for @picture do |f|
+  - if @picture.confirming.blank?
+    .form-inputs
+      = f.input :print_num, label: 'プリント番号'
+      = f.input :description, label: '説明'
+    .form-actions
+      = f.button :submit, '内容を確認する'
+  - else
+    %table.table
+      %tr
+        %th プリント番号
+        %td= @picture.print_num
+      %tr
+        %th 説明
+        %td= @picture.description
+    .form-inputs
+      = f.hidden_field :print_num
+      = f.hidden_field :description
+    .form-actions
+      %p この内容でご質問メールを送信します。よろしいですか？
+      = f.button :submit, '送信する'
+
+= f.hidden_field :confirming
